@@ -1,0 +1,80 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="assets/style.css" type='text/css' rel='stylesheet'/>
+</head>
+
+<body>
+
+    <div class="alert alert-success" role="alert">
+    POST /albums - resource to create an album</div>
+
+    <table class="table table-bordered">
+        <tr><td>REQUEST example: POST /albums </td><TD>RESPONSE example</TD></tr>
+        <tr>
+            <td>        
+                <pre><code class="language-json">
+                {
+                    "title": "Bounce",
+                    "artist": "Bon Jovi",
+                    "genre": "Hard rock - heavy metal - pop rock",
+                    "label": "Island - Mercury",
+                    "songs": 12,
+                    "year": 2002
+                }
+                </code></pre>
+            </td>
+            <td>        
+                <pre><code class="language-json">
+                    {
+                        "message": "Album created succesfully",
+                        "album_id": "1679786701482"
+                    }
+                </code></pre>
+            </td>
+        </tr>
+    </table>
+
+        <div class="alert alert-warning" role="alert">
+            PUT /albums/{album_id} - resource to update an album</div>
+        
+            <table class="table table-bordered">
+                <tr><td>REQUEST example : PUT /albums/1679786701482 </td><TD>RESPONSE example</TD></tr>
+                <tr>
+                    <td>        
+                        <pre><code class="language-json">
+                        {
+                            "title": "update_Bounce",
+                            "artist": "update_Bon Jovi",
+                            "genre": "update_Hard rock - heavy metal - pop rock",
+                            "label": "update_Island - Mercury",
+                            "songs": 24,
+                            "year": 2003
+                        }
+                        </code></pre>
+                    </td>
+                    <td>        
+                        <pre><code class="language-json">
+                        {
+                            "acknowledged": true,
+                            "modifiedCount": 1,
+                            "upsertedId": null,
+                            "upsertedCount": 0,
+                            "matchedCount": 1
+                        }
+                        </code></pre>
+                    </td>
+                </tr>
+            </table>
+
+            <div class="alert alert-danger" role="alert">
+                DELETE /albums/{album_id} - resource to delete an album</div>
+            <div class="alert alert-primary" role="alert">
+                GET /albums - resource to read all albums</div>    
+            <div class="alert alert-primary" role="alert">
+                GET /albums/{album_id} - resource to read 1 album</div>  
+
+</body>
+
+</html>
