@@ -10,6 +10,8 @@ router.get("/", async (req, res) => {
   let results = await collection.find({})
     .toArray();
 
+  const countDoc = await collection.countDocuments();
+  console.log("GET operation result - countDocuments: " + countDoc)
   res.send(results).status(200);
 });
 
@@ -21,7 +23,10 @@ router.get("/:id", async (req, res) => {
   let query = { album_id: req.params.id };
   let result = await collection.findOne(query);
 
-  if (!result) res.send("Not found").status(404);
+  if (!result) { 
+    console.log("GET operation result: " + result)
+    res.send("Not found").status(404);
+  }
   else res.send(result).status(200);
 });
 
