@@ -36,12 +36,12 @@ router.post("/", async (req, res) => {
   let collection = await db.collection("albums");
   const doc = {
     album_id: id.toString(),
-    title: "Bounce",
-    artist: "Bon Jovi",
-    genre: "Hard rock - heavy metal - pop rock",
-    label: "Island - Mercury",
-    songs: 12,
-    year: 2002,
+    title: req.body.title,
+    artist: req.body.artist,
+    genre: req.body.genre,
+    label: req.body.label,
+    songs: req.body.songs,
+    year: req.body.year,
   }
   let result = await collection.insertOne(doc);
   res.json({ "message" : "Album created succesfully", "album_id" : doc.album_id}).status(201);
