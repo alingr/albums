@@ -45,7 +45,7 @@ router.post("/", async (req, res) => {
 
 // Update the post with a new comment
 router.put("/:id", async (req, res) => {
-    // create a filter for an album  to update
+    // create a filter for an album to update
     const filter = { album_id: req.params.id };
 
     // this option instructs the method to create a document if no documents match the filter
@@ -66,6 +66,11 @@ router.put("/:id", async (req, res) => {
   let collection = await db.collection("albums");
   let result = await collection.updateOne(filter, updateDoc);
 
+  console.log("PUT operation result - acknowledged: " + result.acknowledged)
+  console.log("PUT operation result - modifiedCount: " + result.modifiedCount)
+  console.log("PUT operation result - upsertedId: " + result.upsertedId)
+  console.log("PUT operation result - upsertedCount: " + result.upsertedCount)
+  console.log("PUT operation result - matchedCount: " + result.matchedCount)
   res.send(result).status(200);
 });
 
@@ -76,6 +81,8 @@ router.delete("/:id", async (req, res) => {
   const collection = db.collection("albums");
   let result = await collection.deleteOne(query);
 
+  console.log("DELETE operation result - acknowledged: " + result.acknowledged)
+  console.log("DELETE operation result - deletedCount: " + result.deletedCount)
   res.send(result).status(200);
 });
 
