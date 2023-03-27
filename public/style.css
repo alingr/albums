@@ -12,3 +12,8 @@ tr:hover{
     text-align: center;
     padding: 10px;
   }
+
+  a { 
+    color: inherit; 
+    text-decoration: underline;
+} 
