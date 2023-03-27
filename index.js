@@ -3,8 +3,8 @@ import cors from "cors";
 import bodyParser from 'body-parser';
 import path from 'path';
 import { fileURLToPath } from 'url';
-//import swaggerUi from 'swagger-ui-express';
-//import swaggerDocument from './swagger.json' assert { type: "json" };
+import swaggerUi from 'swagger-ui-express';
+import swaggerDocument from './swagger.json' assert { type: "json" };
 
 const __filename = fileURLToPath(import.meta.url);
 
@@ -20,7 +20,7 @@ app.use(cors());
 app.use(express.json());
 
 // use swagger page as start page
-//app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
