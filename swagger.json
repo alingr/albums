@@ -5,15 +5,19 @@
         "version": "1.0.0",
         "title": "Albums API"
     },
-    "schemes": ["https"],
+    "schemes": [
+        "https"
+    ],
     "host": "albums-collection-service.herokuapp.com",
     "basePath": "/",
-    "paths" : {
-        "/albums" : {
-            "get" : {
-                "summary" : "Get all the albums",
+    "paths": {
+        "/albums": {
+            "get": {
+                "summary": "Get all the albums",
                 "description": "Get all the albums",
-                "produces": ["application/json"],
+                "produces": [
+                    "application/json"
+                ],
                 "parameters": [],
                 "responses": {
                     "200": {
@@ -33,11 +37,15 @@
                     }
                 }
             },
-            "post" : {
-                "summary" : "Create an album",
+            "post": {
+                "summary": "Create an album",
                 "description": "Create an album",
-                "produces": ["application/json"],
-                "consumes": ["application/json"],
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
                 "parameters": [
                     {
                         "in": "body",
@@ -46,7 +54,7 @@
                         "required": true,
                         "schema": {
                             "type": "object",
-                            "$ref": "#/definitions/AlbumRequestDto"
+                            "$ref": "#/definitions/AlbumPostRequestDto"
                         }
                     }
                 ],
@@ -66,11 +74,13 @@
                 }
             }
         },
-        "/albums/{id}" : {
-            "get" : {
-                "summary" : "Get an album",
+        "/albums/{id}": {
+            "get": {
+                "summary": "Get an album",
                 "description": "Get an album",
-                "produces": ["application/json"],
+                "produces": [
+                    "application/json"
+                ],
                 "parameters": [
                     {
                         "name": "id",
@@ -98,11 +108,13 @@
                         "message": "Not found"
                     }
                 }
-            },            
-            "put" : {
-                "summary" : "Update an album",
+            },
+            "put": {
+                "summary": "Update an album",
                 "description": "Update an album",
-                "produces": ["application/json"],
+                "produces": [
+                    "application/json"
+                ],
                 "parameters": [
                     {
                         "name": "id",
@@ -118,7 +130,7 @@
                         "required": true,
                         "schema": {
                             "type": "object",
-                            "$ref": "#/definitions/AlbumRequestDto"
+                            "$ref": "#/definitions/AlbumPutRequestDto"
                         }
                     }
                 ],
@@ -137,10 +149,52 @@
                     }
                 }
             },
-            "delete" : {
-                "summary" : "Delete an album",
+            "patch": {
+                "summary": "Update an album",
+                "description": "Update an album",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "album_id that needs to be updated",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "album object",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/AlbumPatchRequestDto"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/UpdateAlbumResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete an album",
                 "description": "Delete an album",
-                "produces": ["application/json"],
+                "produces": [
+                    "application/json"
+                ],
                 "parameters": [
                     {
                         "name": "id",
@@ -166,9 +220,36 @@
                 }
             }
         }
-    }, 
+    },
     "definitions": {
-        "AlbumRequestDto": {
+        "AlbumPostRequestDto": {
+            "type": "object",
+            "required": [
+                "title"
+            ],
+            "properties": {
+                "title": {
+                    "type": "string",
+                    "required": true
+                },
+                "artist": {
+                    "type": "string"
+                },
+                "genre": {
+                    "type": "string"
+                },
+                "label": {
+                    "type": "string"
+                },
+                "songs": {
+                    "type": "integer"
+                },
+                "year": {
+                    "type": "integer"
+                }
+            }
+        },
+        "AlbumPatchRequestDto": {
             "type": "object",
             "properties": {
                 "title": {
@@ -179,24 +260,60 @@
                 },
                 "genre": {
                     "type": "string"
-               },
-               "label": {
-                   "type": "string"
-               },
-               "songs": {
-                   "type": "integer"
-               },
-               "year": {
-                   "type": "integer"
-               }
+                },
+                "label": {
+                    "type": "string"
+                },
+                "songs": {
+                    "type": "integer"
+                },
+                "year": {
+                    "type": "integer"
+                }
             }
         },
-
+        "AlbumPutRequestDto": {
+            "type": "object",
+            "required": [
+                "title",
+                "artist",
+                "genre",
+                "label",
+                "songs",
+                "year"
+            ],
+            "properties": {
+                "title": {
+                    "type": "string",
+                    "required": true
+                },
+                "artist": {
+                    "type": "string",
+                    "required": true
+                },
+                "genre": {
+                    "type": "string",
+                    "required": true
+                },
+                "label": {
+                    "type": "string",
+                    "required": true
+                },
+                "songs": {
+                    "type": "integer",
+                    "required": true
+                },
+                "year": {
+                    "type": "integer",
+                    "required": true
+                }
+            }
+        },
         "AlbumResponseDto": {
             "type": "object",
             "properties": {
                 "_id": {
-                     "type": "string"
+                    "type": "string"
                 },
                 "album_id": {
                     "type": "string"
@@ -209,19 +326,18 @@
                 },
                 "genre": {
                     "type": "string"
-               },
-               "label": {
-                   "type": "string"
-               },
-               "songs": {
-                   "type": "integer"
-               },
-               "year": {
-                   "type": "integer"
-               }
+                },
+                "label": {
+                    "type": "string"
+                },
+                "songs": {
+                    "type": "integer"
+                },
+                "year": {
+                    "type": "integer"
+                }
             }
         },
-        
         "InvalidResponse": {
             "type": "object",
             "properties": {
@@ -232,7 +348,6 @@
                     "type": "string"
                 }
             }
-
         },
         "CreateAlbumResponse": {
             "type": "object",
@@ -244,7 +359,6 @@
                     "type": "string"
                 }
             }
-
         },
         "UpdateAlbumResponse": {
             "type": "object",
@@ -265,7 +379,6 @@
                     "type": "integer"
                 }
             }
-
         },
         "DeleteAlbumResponse": {
             "type": "object",
@@ -277,7 +390,6 @@
                     "type": "integer"
                 }
             }
-
         }
     }
 }
