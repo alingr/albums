@@ -24,7 +24,7 @@ router.get("/:id", async (req, res) => {
 
   if (countDocuments == 0) {
     console.log("GET operation result: album_id " + req.params.id + " not found");
-    res.status(404).send("Not found");
+    res.status(404).send('The album with the given album_id was not found.');
   } else {
     let result = await collection.findOne(query);
     res.send(result).status(200);
@@ -35,7 +35,7 @@ router.get("/:id", async (req, res) => {
 router.post("/", async (req, res) => {
   // throw bad request if title is missing from body
   if (req.body.title == null || req.body.title == undefined) {
-    res.status(400).send('The title field is required.');
+    res.status(400).json({ "statusCode": 400, "message": "The title field is required." });
   } else {
     let id = Date.now();
     let collection = await db.collection("albums");
@@ -57,33 +57,37 @@ router.post("/", async (req, res) => {
 
 // Update the entire document 
 router.put("/:id", async (req, res) => {
-  // create a filter for an album to update
-  const filter = { album_id: req.params.id };
+  if (req.params.id == null || req.params.id == undefined) {
+    res.status(400).json({ "statusCode": 400, "message": "The album_id path parameter is required." });
+  } else {
+    // create a filter for an album to update
+    const filter = { album_id: req.params.id };
 
-  // this option instructs the method to create a document if no documents match the filter
-  const options = { upsert: true };
+    // this option instructs the method to create a document if no documents match the filter
+    const options = { upsert: true };
 
-  // create a document that sets the updated data of the album
-  const updateDoc = {
-    $set: {
-      title: req.body.title,
-      artist: req.body.artist,
-      genre: req.body.genre,
-      label: req.body.label,
-      songs: req.body.songs,
-      year: req.body.year,
-    },
-  };
+    // create a document that sets the updated data of the album
+    const updateDoc = {
+      $set: {
+        title: req.body.title,
+        artist: req.body.artist,
+        genre: req.body.genre,
+        label: req.body.label,
+        songs: req.body.songs,
+        year: req.body.year,
+      },
+    };
 
-  let collection = await db.collection("albums");
-  let result = await collection.updateOne(filter, updateDoc);
+    let collection = await db.collection("albums");
+    let result = await collection.updateOne(filter, updateDoc);
 
-  console.log("PUT operation result - acknowledged: " + result.acknowledged)
-  console.log("PUT operation result - modifiedCount: " + result.modifiedCount)
-  console.log("PUT operation result - upsertedId: " + result.upsertedId)
-  console.log("PUT operation result - upsertedCount: " + result.upsertedCount)
-  console.log("PUT operation result - matchedCount: " + result.matchedCount)
-  res.send(result).status(200);
+    console.log("PUT operation result - acknowledged: " + result.acknowledged)
+    console.log("PUT operation result - modifiedCount: " + result.modifiedCount)
+    console.log("PUT operation result - upsertedId: " + result.upsertedId)
+    console.log("PUT operation result - upsertedCount: " + result.upsertedCount)
+    console.log("PUT operation result - matchedCount: " + result.matchedCount)
+    res.send(result).status(200);
+  }
 });
 
 // Update specific fields of the document 
@@ -116,8 +120,6 @@ router.patch("/:id", async (req, res) => {
     console.log("PATCH operation result - matchedCount: " + result.matchedCount)
     res.send(result).status(200);
   }
-
-
 });
 
 // Delete an entry

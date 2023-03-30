@@ -104,7 +104,7 @@
                         }
                     },
                     "404": {
-                        "description": "Invalid status value",
+                        "description": "Not Found",
                         "message": "Not found"
                     }
                 }
@@ -186,6 +186,10 @@
                         "schema": {
                             "$ref": "#/definitions/InvalidResponse"
                         }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "message": "Not found"
                     }
                 }
             },
@@ -342,7 +346,7 @@
             "type": "object",
             "properties": {
                 "statusCode": {
-                    "type": "string"
+                    "type": "integer"
                 },
                 "message": {
                     "type": "string"
