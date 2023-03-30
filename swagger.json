@@ -21,7 +21,7 @@
                 "parameters": [],
                 "responses": {
                     "200": {
-                        "description": "successful operation",
+                        "description": "Successful operation",
                         "schema": {
                             "type": "array",
                             "items": {
@@ -59,8 +59,8 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "successful operation",
+                    "201": {
+                        "description": "Successful operation",
                         "schema": {
                             "$ref": "#/definitions/CreateAlbumResponse"
                         }
@@ -92,7 +92,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "successful operation",
+                        "description": "Successful operation",
                         "schema": {
                             "$ref": "#/definitions/AlbumResponseDto"
                         }
@@ -136,7 +136,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "successful operation",
+                        "description": "Successful operation",
                         "schema": {
                             "$ref": "#/definitions/UpdateAlbumResponse"
                         }
@@ -176,7 +176,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "successful operation",
+                        "description": "Successful operation",
                         "schema": {
                             "$ref": "#/definitions/UpdateAlbumResponse"
                         }
@@ -206,7 +206,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "successful operation",
+                        "description": "Successful operation",
                         "schema": {
                             "$ref": "#/definitions/DeleteAlbumResponse"
                         }

@@ -18,16 +18,17 @@ router.get("/", async (req, res) => {
 // Get a single album
 router.get("/:id", async (req, res) => {
   let collection = await db.collection("albums");
-  //let query = {artist: req.params.id};
   console.log(req.params.id)
   let query = { album_id: req.params.id };
-  let result = await collection.findOne(query);
+  let countDocuments = await collection.countDocuments(query);
 
-  if (!result) {
-    console.log("GET operation result: " + result)
-    res.send("Not found").status(404);
+  if (countDocuments == 0) {
+    console.log("GET operation result: album_id " + req.params.id + " not found");
+    res.status(404).send("Not found");
+  } else {
+    let result = await collection.findOne(query);
+    res.send(result).status(200);
   }
-  else res.send(result).status(200);
 });
 
 // Add a new document to the collection
@@ -48,7 +49,7 @@ router.post("/", async (req, res) => {
       year: req.body.year,
     }
     let result = await collection.insertOne(doc);
-    res.json({ "message": "Album created succesfully", "album_id": doc.album_id }).status(201);
+    res.status(201).json({ "message": "Album created succesfully", "album_id": doc.album_id });
     console.log(`An album was created with the id: ${doc.album_id}`);
   }
 
