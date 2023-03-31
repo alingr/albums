@@ -106,7 +106,7 @@ router.patch("/:id", async (req, res) => {
   } else {
     let query = { $set: {} };
     for (let key in req.body) {
-      if (album[key] && album[key] !== req.body[key]) // if the field in req.body exists, update it
+      if (album[key] && album[key] !== req.body[key] && key !== "album_id" && key !== "_id") // if the field in req.body exists, update it
         query.$set[key] = req.body[key];
     }
 

@@ -54,7 +54,7 @@
                         "required": true,
                         "schema": {
                             "type": "object",
-                            "$ref": "#/definitions/AlbumPostRequestDto"
+                            "$ref": "#/definitions/CreateAlbumDto"
                         }
                     }
                 ],
@@ -130,7 +130,7 @@
                         "required": true,
                         "schema": {
                             "type": "object",
-                            "$ref": "#/definitions/AlbumPutRequestDto"
+                            "$ref": "#/definitions/UpdateAlbumDto"
                         }
                     }
                 ],
@@ -170,7 +170,7 @@
                         "required": true,
                         "schema": {
                             "type": "object",
-                            "$ref": "#/definitions/AlbumPatchRequestDto"
+                            "$ref": "#/definitions/UpdateAlbumDto"
                         }
                     }
                 ],
@@ -226,7 +226,7 @@
         }
     },
     "definitions": {
-        "AlbumPostRequestDto": {
+        "CreateAlbumDto": {
             "type": "object",
             "required": [
                 "title"
@@ -253,7 +253,7 @@
                 }
             }
         },
-        "AlbumPatchRequestDto": {
+        "UpdateAlbumDto": {
             "type": "object",
             "properties": {
                 "title": {
@@ -273,43 +273,6 @@
                 },
                 "year": {
                     "type": "integer"
-                }
-            }
-        },
-        "AlbumPutRequestDto": {
-            "type": "object",
-            "required": [
-                "title",
-                "artist",
-                "genre",
-                "label",
-                "songs",
-                "year"
-            ],
-            "properties": {
-                "title": {
-                    "type": "string",
-                    "required": true
-                },
-                "artist": {
-                    "type": "string",
-                    "required": true
-                },
-                "genre": {
-                    "type": "string",
-                    "required": true
-                },
-                "label": {
-                    "type": "string",
-                    "required": true
-                },
-                "songs": {
-                    "type": "integer",
-                    "required": true
-                },
-                "year": {
-                    "type": "integer",
-                    "required": true
                 }
             }
         },
