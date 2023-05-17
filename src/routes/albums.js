@@ -7,7 +7,8 @@ const router = express.Router();
 // Get a list of albums
 router.get("/", async (req, res) => {
   let collection = await db.collection("albums");
-  let results = await collection.find({})
+  const projection = { _id: 0};
+  let results = await collection.find().project(projection)
     .toArray();
 
   const countDoc = await collection.countDocuments();
@@ -18,6 +19,7 @@ router.get("/", async (req, res) => {
 // Get a single album
 router.get("/:id", async (req, res) => {
   let collection = await db.collection("albums");
+  const projection = { _id: 0};
   console.log(req.params.id)
   let query = { album_id: req.params.id };
   let countDocuments = await collection.countDocuments(query);
@@ -26,7 +28,7 @@ router.get("/:id", async (req, res) => {
     console.log("GET operation result: album_id " + req.params.id + " not found");
     res.status(404).send('The album with the given album_id was not found.');
   } else {
-    let result = await collection.findOne(query);
+    let result = await collection.findOne(query, {projection});
     res.send(result).status(200);
   }
 });
