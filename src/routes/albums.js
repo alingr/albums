@@ -108,7 +108,7 @@ router.put("/:id", async (req, res) => {
 // Update specific fields of the document 
 router.patch("/:id", async (req, res) => {
   // log PATCH request body
-  console.log("PUT request body:")
+  console.log("PATCH request body:")
   console.log(req.body)
 
   // create a filter for an album to update
