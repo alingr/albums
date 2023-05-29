@@ -279,9 +279,6 @@
         "AlbumResponseDto": {
             "type": "object",
             "properties": {
-                "_id": {
-                    "type": "string"
-                },
                 "album_id": {
                     "type": "string"
                 },

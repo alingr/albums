@@ -83,6 +83,7 @@ router.put("/:id", async (req, res) => {
     let collection = await db.collection("albums");
     let result = await collection.updateOne(filter, updateDoc);
 
+    // log PUT operatiion results
     console.log("PUT operation result - acknowledged: " + result.acknowledged)
     console.log("PUT operation result - modifiedCount: " + result.modifiedCount)
     console.log("PUT operation result - upsertedId: " + result.upsertedId)
@@ -115,6 +116,7 @@ router.patch("/:id", async (req, res) => {
     let collection2 = await db.collection("albums");
     let result = await collection2.updateOne(filter, query);
 
+    // log PATCH operatiion results
     console.log("PATCH operation result - acknowledged: " + result.acknowledged)
     console.log("PATCH operation result - modifiedCount: " + result.modifiedCount)
     console.log("PATCH operation result - upsertedId: " + result.upsertedId)
@@ -131,6 +133,7 @@ router.delete("/:id", async (req, res) => {
   const collection = db.collection("albums");
   let result = await collection.deleteOne(query);
 
+  // log DELETE operatiion results
   console.log("DELETE operation result - acknowledged: " + result.acknowledged)
   console.log("DELETE operation result - deletedCount: " + result.deletedCount)
   res.send(result).status(200);

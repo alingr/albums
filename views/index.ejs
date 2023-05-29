@@ -79,6 +79,37 @@
         </div>
       </div>
 
+      <div class="card" >
+        <div class="card-body">
+            <div class="alert alert-info" role="alert">
+                PATCH /albums/{album_id} - resource to update an album</div>
+                
+            <table class="table table-bordered">
+                <tr><td>REQUEST example : PATCH /albums/1679786701482 </td><TD>RESPONSE example</TD></tr>
+                <tr>
+                    <td>        
+                        <pre><code class="language-json">
+                        {
+                            "title": "patch_update_Bounce"
+                        }
+                        </code></pre>
+                    </td>
+                    <td>        
+                        <pre><code class="language-json">
+                        {
+                            "acknowledged": true,
+                            "modifiedCount": 1,
+                            "upsertedId": null,
+                            "upsertedCount": 0,
+                            "matchedCount": 1
+                        }
+                        </code></pre>
+                    </td>
+                </tr>
+            </table> 
+        </div>
+      </div>  
+
     <div class="card" >
         <div class="card-body">
             <div class="alert alert-danger" role="alert">
