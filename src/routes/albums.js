@@ -29,12 +29,20 @@ router.get("/:id", async (req, res) => {
     res.status(404).send('The album with the given album_id was not found.');
   } else {
     let result = await collection.findOne(query, {projection});
+
+    // log GET operation result
+    console.log("GET operation result:")
+    console.log(result)
     res.send(result).status(200);
   }
 });
 
 // Add a new document to the collection
 router.post("/", async (req, res) => {
+  // log POST request body
+  console.log("POST request body:")
+  console.log(req.body)
+
   // throw bad request if title is missing from body
   if (req.body.title == null || req.body.title == undefined) {
     res.status(400).json({ "statusCode": 400, "message": "The title field is required." });
@@ -59,6 +67,10 @@ router.post("/", async (req, res) => {
 
 // Update the entire document 
 router.put("/:id", async (req, res) => {
+  // log PUT request body
+  console.log("PUT request body:")
+  console.log(req.body)
+
   if (req.params.id == null || req.params.id == undefined) {
     res.status(400).json({ "statusCode": 400, "message": "The album_id path parameter is required." });
   } else {
@@ -83,7 +95,7 @@ router.put("/:id", async (req, res) => {
     let collection = await db.collection("albums");
     let result = await collection.updateOne(filter, updateDoc);
 
-    // log PUT operatiion results
+    // log PUT operation results
     console.log("PUT operation result - acknowledged: " + result.acknowledged)
     console.log("PUT operation result - modifiedCount: " + result.modifiedCount)
     console.log("PUT operation result - upsertedId: " + result.upsertedId)
@@ -95,6 +107,10 @@ router.put("/:id", async (req, res) => {
 
 // Update specific fields of the document 
 router.patch("/:id", async (req, res) => {
+  // log PATCH request body
+  console.log("PUT request body:")
+  console.log(req.body)
+
   // create a filter for an album to update
   const filter = { album_id: req.params.id };
 
@@ -116,7 +132,7 @@ router.patch("/:id", async (req, res) => {
     let collection2 = await db.collection("albums");
     let result = await collection2.updateOne(filter, query);
 
-    // log PATCH operatiion results
+    // log PATCH operation results
     console.log("PATCH operation result - acknowledged: " + result.acknowledged)
     console.log("PATCH operation result - modifiedCount: " + result.modifiedCount)
     console.log("PATCH operation result - upsertedId: " + result.upsertedId)
@@ -133,7 +149,7 @@ router.delete("/:id", async (req, res) => {
   const collection = db.collection("albums");
   let result = await collection.deleteOne(query);
 
-  // log DELETE operatiion results
+  // log DELETE operation results
   console.log("DELETE operation result - acknowledged: " + result.acknowledged)
   console.log("DELETE operation result - deletedCount: " + result.deletedCount)
   res.send(result).status(200);
